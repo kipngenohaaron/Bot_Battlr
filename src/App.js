@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import BotCollection from './components/BotCollection';
 import YourBotArmy from './components/YourBotArmy';
 import BotSpecs from './components/BotSpecs';
+import data from './src/db.json'
 
 function App() {
   const [selectedBot, setSelectedBot] = useState(null);
