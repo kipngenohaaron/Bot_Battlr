@@ -8,7 +8,7 @@ const BotSpecs = () => {
 
   useEffect(() => {
     // Fetch bot data using the provided API endpoint
-    fetch(`http://localhost:8001/bots/${id}`)
+    fetch(`http://localhost:3000/bots/${id}`)
       .then((response) => response.json())
       .then((data) => setSelectedBot(data))
       .catch((error) => console.log('Error fetching bot data:', error));

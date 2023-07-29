@@ -4,7 +4,7 @@ const BotCollection = () => {
   const [bots, setBots] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8001/bots') // Assuming the JSON DB server is running at http://localhost:8001
+    fetch('./db.json') // Assuming the JSON DB server is running at http://localhost:8001
       .then((response) => response.json())
       .then((data) => setBots(data));
   }, []);
