@@ -1,44 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
-const BotSpecs = () => {
+const BotSpecs = ({ bots }) => {
   const { id } = useParams();
   const [selectedBot, setSelectedBot] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
-    // Fetch bot data using the provided API endpoint
-    fetch(`http://localhost:3000/bots/${id}`)
-      .then((response) => response.json())
-      .then((data) => setSelectedBot(data))
-      .catch((error) => console.log('Error fetching bot data:', error));
-  }, [id]);
+    const bot = bots.find((bot) => bot.id === parseInt(id));
+    setSelectedBot(bot);
+  }, [bots, id]);
 
   const handleEnlist = () => {
-    // Logic to enlist the bot into your army
-    // ...
-  };
-
-  const handleBack = () => {
     history.push('/');
   };
 
-  if (!selectedBot) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div>
-      <h2>{selectedBot.name}</h2>
-      <p>Health: {selectedBot.health}</p>
-      <p>Damage: {selectedBot.damage}</p>
-      <p>Armor: {selectedBot.armor}</p>
-      <p>Class: {selectedBot.bot_class}</p>
-      <p>Catchphrase: {selectedBot.catchphrase}</p>
-      <img src={selectedBot.avatar_url} alt={selectedBot.name} />
-
-      <button onClick={handleEnlist}>Enlist</button>
-      <button onClick={handleBack}>Back</button>
+    <div className="bot-specs">
+      {selectedBot ? (
+        <>
+          <img src={selectedBot.avatar_url} alt={selectedBot.name} />
+          <h2>{selectedBot.name}</h2>
+          <p>{selectedBot.bot_class}</p>
+          <p>Health: {selectedBot.health}</p>
+          <p>Damage: {selectedBot.damage}</p>
+          <p>Armor: {selectedBot.armor}</p>
+          <p>Catchphrase: {selectedBot.catchphrase}</p>
+          <button onClick={handleEnlist}>Enlist</button>
+          <button onClick={() => history.push('/')}>Back</button>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
