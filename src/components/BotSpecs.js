@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const BotSpecs = ({ selectedBot, setSelectedBot }) => {
   const [bot, setBot] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -20,12 +20,12 @@ const BotSpecs = ({ selectedBot, setSelectedBot }) => {
 
   const handleEnlist = () => {
     setSelectedBot(bot);
-    history.push('/your-bot-army');
+    navigate('/your-bot-army');
   };
 
   const handleRelease = () => {
     setSelectedBot(null);
-    history.push('/your-bot-army');
+    navigate('/your-bot-army');
   };
 
   const handleDischarge = () => {
@@ -33,7 +33,7 @@ const BotSpecs = ({ selectedBot, setSelectedBot }) => {
       .delete(`http://localhost:8001/bots/${id}`)
       .then(() => {
         setSelectedBot(null);
-        history.push('/your-bot-army');
+        navigate('/your-bot-army');
       })
       .catch((error) => console.error('Error deleting bot:', error));
   };
