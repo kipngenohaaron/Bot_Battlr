@@ -1,17 +1,27 @@
-import React from 'react';
-import BotCard from './BotCard';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const BotCollection = ({ bots, addToArmy }) => {
+function BotCollection() {
+  const [bots, setBots] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8001/bots')
+      .then((response) => response.json())
+      .then((data) => setBots(data));
+  }, []);
+
   return (
-    <div className="bot-collection">
-      <h2>All Bots</h2>
-      <div className="bot-list">
+    <div>
+      <h1>Bot Collection</h1>
+      <ul>
         {bots.map((bot) => (
-          <BotCard key={bot.id} bot={bot} addToArmy={addToArmy} />
+          <li key={bot.id}>
+            <Link to={`/bot/${bot.id}`}>{bot.name}</Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
-};
+}
 
 export default BotCollection;

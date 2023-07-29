@@ -1,39 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 
-const BotSpecs = ({ bots }) => {
+function BotSpecs() {
   const { id } = useParams();
-  const [selectedBot, setSelectedBot] = useState(null);
-  const history = useHistory();
+  const [bot, setBot] = useState(null);
 
   useEffect(() => {
-    const bot = bots.find((bot) => bot.id === parseInt(id));
-    setSelectedBot(bot);
-  }, [bots, id]);
+    fetch(`http://localhost:8001/bots/${id}`)
+      .then((response) => response.json())
+      .then((data) => setBot(data));
+  }, [id]);
 
-  const handleEnlist = () => {
-    history.push('/');
-  };
+  if (!bot) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="bot-specs">
-      {selectedBot ? (
-        <>
-          <img src={selectedBot.avatar_url} alt={selectedBot.name} />
-          <h2>{selectedBot.name}</h2>
-          <p>{selectedBot.bot_class}</p>
-          <p>Health: {selectedBot.health}</p>
-          <p>Damage: {selectedBot.damage}</p>
-          <p>Armor: {selectedBot.armor}</p>
-          <p>Catchphrase: {selectedBot.catchphrase}</p>
-          <button onClick={handleEnlist}>Enlist</button>
-          <button onClick={() => history.push('/')}>Back</button>
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
+    <div>
+      <h2>{bot.name}</h2>
+      <img src={bot.avatar_url} alt={bot.name} />
+      <p>Health: {bot.health}</p>
+      <p>Damage: {bot.damage}</p>
+      <p>Armor: {bot.armor}</p>
+      <p>Class: {bot.bot_class}</p>
+      <p>Catchphrase: {bot.catchphrase}</p>
+      <Link to="/">Back to Collection</Link>
     </div>
   );
-};
+}
 
 export default BotSpecs;

@@ -1,17 +1,36 @@
-import React from 'react';
-import BotCard from './BotCard';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const YourBotArmy = ({ army, removeFromArmy }) => {
+function YourBotArmy() {
+  const [armyBots, setArmyBots] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8001/your-army')
+      .then((response) => response.json())
+      .then((data) => setArmyBots(data));
+  }, []);
+
+  const handleDischarge = (id) => {
+    fetch(`http://localhost:8001/your-army/${id}`, {
+      method: 'DELETE',
+    }).then(() => {
+      setArmyBots((prevArmyBots) => prevArmyBots.filter((bot) => bot.id !== id));
+    });
+  };
+
   return (
-    <div className="bot-army">
-      <h2>Your Bot Army</h2>
-      <div className="bot-list">
-        {army.map((bot) => (
-          <BotCard key={bot.id} bot={bot} removeFromArmy={removeFromArmy} />
+    <div>
+      <h1>Your Bot Army</h1>
+      <ul>
+        {armyBots.map((bot) => (
+          <li key={bot.id}>
+            <Link to={`/bot/${bot.id}`}>{bot.name}</Link>{' '}
+            <button onClick={() => handleDischarge(bot.id)}>Discharge</button>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
-};
+}
 
 export default YourBotArmy;
