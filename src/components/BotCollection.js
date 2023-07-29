@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function BotCollection() {
+const BotCollection = ({ setSelectedBot }) => {
   const [bots, setBots] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8001/bots')
-      .then((response) => response.json())
-      .then((data) => setBots(data));
+    axios
+      .get('http://localhost:8001/bots')
+      .then((response) => setBots(response.data))
+      .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
   return (
     <div>
-      <h1>Bot Collection</h1>
-      <ul>
+      <h2>Available Bots</h2>
+      <div className="bot-collection">
         {bots.map((bot) => (
-          <li key={bot.id}>
-            <Link to={`/bot/${bot.id}`}>{bot.name}</Link>
-          </li>
+          <div key={bot.id} className="bot-card">
+            <h3>{bot.name}</h3>
+            <img src={bot.avatar_url} alt={bot.name} />
+            <Link to={`/bots/${bot.id}`}>View Details</Link>
+            <button onClick={() => setSelectedBot(bot)}>Enlist</button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
-}
+};
 
 export default BotCollection;

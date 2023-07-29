@@ -11,7 +11,7 @@ function YourBotArmy() {
   }, []);
 
   const handleDischarge = (id) => {
-    fetch(`http://localhost:8001/your-army/${id}`, {
+    fetch(`http://localhost:3000/your-army/${id}`, {
       method: 'DELETE',
     }).then(() => {
       setArmyBots((prevArmyBots) => prevArmyBots.filter((bot) => bot.id !== id));
