@@ -1,21 +1,22 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import BotCollection from './components/BotCollection';
 import YourBotArmy from './components/YourBotArmy';
 import BotSpecs from './components/BotSpecs';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div>
         <Switch>
           <Route exact path="/" component={BotCollection} />
-          <Route exact path="/army" component={YourBotArmy} />
-          <Route exact path="/bots/:id" component={BotSpecs} />
+          <Route path="/army" component={YourBotArmy} />
+          <Route path="/bot/:id" component={BotSpecs} />
         </Switch>
       </div>
     </Router>
   );
-}
+};
 
 export default App;
