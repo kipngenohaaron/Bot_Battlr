@@ -8,6 +8,7 @@ const BotCollection = ({ bots, yourBotArmy, enlistBot, releaseBot, dischargeBot,
         {bots.map((bot) => (
           <div key={bot.id} className="bot-card">
             <h3>{bot.name}</h3>
+            <img src={bot.avatar_url} alt='image' />
             <p>Health: {bot.health}</p>
             <p>Damage: {bot.damage}</p>
             <p>Armor: {bot.armor}</p>
