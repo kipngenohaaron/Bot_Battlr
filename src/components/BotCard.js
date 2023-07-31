@@ -1,12 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const BotCard = ({ bot, onEnlist }) => {
+const BotCard = ({ bot, enlistBot }) => {
+  const handleEnlist = () => {
+    enlistBot(bot);
+  };
+
   return (
-    <div>
+    <div className="bot-card">
       <img src={bot.avatar_url} alt={bot.name} />
-      <h2>{bot.name}</h2>
-      {/* Add more bot details */}
-      <button onClick={() => onEnlist(bot)}>Enlist</button>
+      <h3>{bot.name}</h3>
+      <p>Health: {bot.health}</p>
+      <p>Damage: {bot.damage}</p>
+      <p>Armor: {bot.armor}</p>
+      <button onClick={handleEnlist}>Enlist</button>
+      <Link to={`/bots/${bot.id}`}>
+        <button>View Details</button>
+      </Link>
     </div>
   );
 };

@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 
-const BotCollection = () => {
-  const [bots, setBots] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:8001/bots')
-      .then(response => setBots(response.data))
-      .catch(error => console.error('Error fetching bots:', error));
-  }, []);
-
+const BotCollection = ({ bots, yourBotArmy, enlistBot, releaseBot, dischargeBot, showBotSpecs }) => {
   return (
-    <div>
-      <h1>Bot Collection</h1>
-      {bots.map(bot => (
-        <div key={bot.id}>
-          <img src={bot.avatar_url} alt={bot.name} />
-          <h2>{bot.name}</h2>
-          {/* Add more bot details */}
-        </div>
-      ))}
+    <div className="bot-collection">
+      <h2>Available Bots</h2>
+      <div className="bot-list">
+        {bots.map((bot) => (
+          <div key={bot.id} className="bot-card">
+            <h3>{bot.name}</h3>
+            <p>Health: {bot.health}</p>
+            <p>Damage: {bot.damage}</p>
+            <p>Armor: {bot.armor}</p>
+            <p>Bot Class: {bot.bot_class}</p>
+            <button onClick={() => enlistBot(bot)}>Enlist</button>
+            <button onClick={() => showBotSpecs(bot)}>Show Specs</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

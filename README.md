@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+Sure! Below is a sample README for the Bot Battlr React application:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Bot Battlr - React App
+# Author - Kipngenoh Aaron Rotich
 
-## Available Scripts
+Welcome to Bot Battlr, the one and only spot in the known universe where you can custom build your own Bot Army! This React application allows users to view available bots, create their bot army, and engage in battles.
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Introduction](#introduction)
+- [Project Setup](#project-setup)
+- [Requirements](#requirements)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Endpoints](#endpoints)
+- [Contributing](#contributing)
+- [License](#license)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Introduction
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Bot Battlr is a React application that displays a list of available bots and allows users to create their bot army. Users can view profiles of all bots, add individual bots to their army, release bots from their army, and discharge bots forever. Additionally, the app provides sorting and filtering functionalities for the bot list.
 
-### `npm test`
+## Project Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To set up the Bot Battlr application, follow these steps:
 
-### `npm run build`
+1. Clone the repository from GitHub: [Link to GitHub Repository](https://github.com/your-username/bot-battlr)
+2. Install the required dependencies by running `npm install` in the project directory.
+3. Create a `db.json` file in the project directory with the bot data in the format specified in the project guidelines.
+4. Start the JSON server by running `json-server --watch db.json --port 8001`.
+5. Run the React app by running `npm start`.
+6. Open the app in your web browser by visiting `http://localhost:3000`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Requirements
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To run this project, you need the following software and tools installed:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Node.js
+- npm (Node Package Manager)
+- json-server (for the backend data)
 
-### `npm run eject`
+## Features
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The core features of the Bot Battlr application include:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Viewing profiles of all bots in the `BotCollection` component.
+- Adding an individual bot to your army by clicking on it. The bot is enlisted only once and remains visible in the `BotCollection`.
+- Releasing a bot from your army by clicking on it. The bot disappears from the `YourBotArmy` component.
+- Discharging a bot from their service forever by clicking the red button marked "x". This action deletes the bot from both the backend and the `YourBotArmy` on the frontend.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Additionally, the app includes the following advanced features:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Sorting bots by their health, damage, or armor using the `SortBar` component.
+- Filtering bots by their class, allowing users to select multiple filters at the same time.
+- Enlisting only one bot from each `bot_class`, which includes the classes `["Support", "Medic", "Assault", "Defender", "Captain", "Witch"]`.
 
-## Learn More
+## Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To install and run the Bot Battlr app, follow these steps:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clone the repository from GitHub: [Link to GitHub Repository](https://github.com/kipngenohaaron/Bot_Battlr)
+2. Install the required dependencies by running `npm install` in the project directory.
 
-### Code Splitting
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To start the Bot Battlr app, run the following command in the project directory:
 
-### Analyzing the Bundle Size
+```
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This will launch the application in your default web browser at `http://localhost:3000`.
 
-### Making a Progressive Web App
+## Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The app fetches bot data from a local JSON server with the following endpoints:
 
-### Advanced Configuration
+- GET `/bots`: Fetches a list of all bots in the format specified in the project guidelines.
+- DELETE `/bots/:id`: Deletes a bot with the specified ID from the backend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Contributing
+If you find any issues or have ideas for new features, please submit a pull request or open an issue on the GitHub repository.
+https://github.com/kipngenohaaron/Bot_Battlr
 
-### Deployment
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The Bot Battlr app is open-source and available under the [MIT License](https://opensource.org/licenses/MIT). Feel free to use and modify the code as per the license terms.
