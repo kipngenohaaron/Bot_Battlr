@@ -3,7 +3,8 @@ import axios from 'axios';
 import BotCollection from './components/BotCollection';
 import YourBotArmy from './components/YourBotArmy';
 import SortBar from './components/SortBar';
-
+import './index.css'; 
+import './App.css';
 const App = () => {
   const [bots, setBots] = useState([]);
   const [yourBotArmy, setYourBotArmy] = useState([]);
@@ -66,7 +67,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Bot Battlr - Custom Build Your Own Bot Army</h1>
+      <h1>Bot Battlr </h1>
       <div className="App-content">
         <div className="App-left">
           <SortBar sortBots={sortBots} />

@@ -1,4 +1,5 @@
 import React from 'react';
+import BotCard from './BotCard';
 
 const YourBotArmy = ({ yourBotArmy, releaseBot, dischargeBot }) => {
   return (
@@ -6,17 +7,12 @@ const YourBotArmy = ({ yourBotArmy, releaseBot, dischargeBot }) => {
       <h2>Your Bot Army</h2>
       <div className="bot-list">
         {yourBotArmy.map((bot) => (
-          <div key={bot.id} className="bot-card">
-            <h3>{bot.name}</h3>
-            
-            <p>Health: {bot.health}</p>
-            <p>Damage: {bot.damage}</p>
-            <p>Armor: {bot.armor}</p>
-            <p>Bot Class: {bot.bot_class}</p>
-            <img src={bot.avatar_url} alt='image' />
-            <button onClick={() => releaseBot(bot)}>Release</button>
-            <button onClick={() => dischargeBot(bot)}>Discharge</button>
-          </div>
+          <BotCard
+            key={bot.id}
+            bot={bot}
+            releaseBot={releaseBot}
+            dischargeBot={dischargeBot}
+          />
         ))}
       </div>
     </div>

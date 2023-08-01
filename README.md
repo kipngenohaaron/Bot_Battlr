@@ -1,5 +1,3 @@
-Sure! Below is a sample README for the Bot Battlr React application:
-
 # Bot Battlr - React App
 # Author - Kipngenoh Aaron Rotich
 
