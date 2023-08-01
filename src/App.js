@@ -3,7 +3,6 @@ import axios from 'axios';
 import BotCollection from './components/BotCollection';
 import YourBotArmy from './components/YourBotArmy';
 import SortBar from './components/SortBar';
-import './index.css';
 import './App.css';
 
 const App = () => {
@@ -78,7 +77,7 @@ const App = () => {
             enlistBot={enlistBot}
             releaseBot={releaseBot}
             dischargeBot={dischargeBot}
-            showBotSpecs={showBotSpecsHandler} // Use showBotSpecsHandler here
+            showBotSpecs={showBotSpecsHandler}
           />
         </div>
         <div className="App-right">
@@ -121,7 +120,7 @@ const App = () => {
         ))}
         <button
           onClick={() => {
-            filterBots([]); // Clear filters by passing an empty array
+            filterBots([]);
           }}
         >
           Clear Filters
