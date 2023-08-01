@@ -3,8 +3,9 @@ import axios from 'axios';
 import BotCollection from './components/BotCollection';
 import YourBotArmy from './components/YourBotArmy';
 import SortBar from './components/SortBar';
-import './index.css'; 
+import './index.css';
 import './App.css';
+
 const App = () => {
   const [bots, setBots] = useState([]);
   const [yourBotArmy, setYourBotArmy] = useState([]);
@@ -54,7 +55,7 @@ const App = () => {
     setBots((prev) => [...prev].sort((a, b) => b[property] - a[property]));
   };
 
-  const filterBots = (selectedClasses) => { // Change 'classes' to 'selectedClasses'
+  const filterBots = (selectedClasses) => {
     if (selectedClasses.length === 0) {
       fetchData();
     } else {
@@ -77,7 +78,7 @@ const App = () => {
             enlistBot={enlistBot}
             releaseBot={releaseBot}
             dischargeBot={dischargeBot}
-            showBotSpecs={showBotSpecsHandler}
+            showBotSpecs={showBotSpecsHandler} // Use showBotSpecsHandler here
           />
         </div>
         <div className="App-right">
@@ -91,7 +92,7 @@ const App = () => {
       {showBotSpecs && selectedBot && (
         <div className="App-bot-specs">
           <button onClick={hideBotSpecs}>Back</button>
-          <button onClick={() => enlistBot(selectedBot)}>Enlist</button>
+          <button onClick={() => enlistBot(selectedBot)}>Enlist</button> {/* Use enlistBot here */}
           <h2>{selectedBot.name}</h2>
           <p>Health: {selectedBot.health}</p>
           <p>Damage: {selectedBot.damage}</p>
@@ -102,30 +103,30 @@ const App = () => {
         </div>
       )}
       <div className="App-filter">
-  <p>Filter by class:</p>
-  {botClasses.map((botClass) => (
-    <label key={botClass}>
-      <input
-        type="checkbox"
-        value={botClass}
-        onChange={(e) => {
-          const selectedClasses = botClasses.filter(
-            (className) => e.target.value === className || e.target.checked
-          );
-          filterBots(selectedClasses);
-        }}
-      />
-      {botClass}
-    </label>
-  ))}
-  <button
-    onClick={() => {
-      filterBots([]); // Clear filters by passing an empty array
-    }}
-  >
-    Clear Filters
-  </button>
-</div>
+        <p>Filter by class:</p>
+        {botClasses.map((botClass) => (
+          <label key={botClass}>
+            <input
+              type="checkbox"
+              value={botClass}
+              onChange={(e) => {
+                const selectedClasses = botClasses.filter(
+                  (className) => e.target.value === className || e.target.checked
+                );
+                filterBots(selectedClasses);
+              }}
+            />
+            {botClass}
+          </label>
+        ))}
+        <button
+          onClick={() => {
+            filterBots([]); // Clear filters by passing an empty array
+          }}
+        >
+          Clear Filters
+        </button>
+      </div>
     </div>
   );
 };
