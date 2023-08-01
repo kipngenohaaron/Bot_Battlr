@@ -17,7 +17,7 @@ const App = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8001/bots');
+      const response = await axios.get('http://localhost:3000/bots');
       setBots(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -34,7 +34,7 @@ const App = () => {
 
   const dischargeBot = async (bot) => {
     try {
-      await axios.delete(`http://localhost:8001/bots/${bot.id}`);
+      await axios.delete(`http://localhost:3000/bots/${bot.id}`);
       setYourBotArmy((prev) => prev.filter((b) => b.id !== bot.id));
     } catch (error) {
       console.error('Error deleting bot:', error);
@@ -54,11 +54,11 @@ const App = () => {
     setBots((prev) => [...prev].sort((a, b) => b[property] - a[property]));
   };
 
-  const filterBots = (classes) => {
-    if (classes.length === 0) {
+  const filterBots = (selectedClasses) => { // Change 'classes' to 'selectedClasses'
+    if (selectedClasses.length === 0) {
       fetchData();
     } else {
-      const filteredBots = bots.filter((bot) => classes.includes(bot.bot_class));
+      const filteredBots = bots.filter((bot) => selectedClasses.includes(bot.bot_class));
       setBots(filteredBots);
     }
   };
@@ -102,30 +102,30 @@ const App = () => {
         </div>
       )}
       <div className="App-filter">
-        <p>Filter by class:</p>
-        {botClasses.map((botClass) => (
-          <label key={botClass}>
-            <input
-              type="checkbox"
-              value={botClass}
-              onChange={(e) => {
-                const selectedClasses = botClasses.filter(
-                  (className) => e.target.value === className || classes.includes(className)
-                );
-                filterBots(selectedClasses);
-              }}
-            />
-            {botClass}
-          </label>
-        ))}
-        <button
-          onClick={() => {
-            filterBots(classes);
-          }}
-        >
-          Clear Filters
-        </button>
-      </div>
+  <p>Filter by class:</p>
+  {botClasses.map((botClass) => (
+    <label key={botClass}>
+      <input
+        type="checkbox"
+        value={botClass}
+        onChange={(e) => {
+          const selectedClasses = botClasses.filter(
+            (className) => e.target.value === className || e.target.checked
+          );
+          filterBots(selectedClasses);
+        }}
+      />
+      {botClass}
+    </label>
+  ))}
+  <button
+    onClick={() => {
+      filterBots([]); // Clear filters by passing an empty array
+    }}
+  >
+    Clear Filters
+  </button>
+</div>
     </div>
   );
 };
